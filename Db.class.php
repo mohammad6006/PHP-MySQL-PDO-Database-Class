@@ -57,7 +57,7 @@ class DB
 			try 
 			{
 				# Read settings from INI file, set UTF8
-				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"]);
 				
 				# We can now log any exceptions on Fatal error. 
 				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -139,7 +139,7 @@ class DB
 	*/	
 		public function bind($para, $value)
 		{	
-			$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . utf8_encode($value);
+			$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . $value;
 		}
        /**
 	*	@void
